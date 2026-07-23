@@ -1,0 +1,41 @@
+{
+  "target": "chatgpt_com",
+  "url": "https://chatgpt.com",
+  "type": "web",
+  "timestamp": 1784813562,
+  "total": 6,
+  "passed": 4,
+  "failed": 2,
+  "results": [
+    {
+      "check": "page_load",
+      "passed": true,
+      "detail": "status=200, time=3.44s"
+    },
+    {
+      "check": "title_check",
+      "passed": true,
+      "detail": "title='ChatGPT: Chat, Work, Create & Code with AI'"
+    },
+    {
+      "check": "forms_present",
+      "passed": true,
+      "detail": "forms_found=8"
+    },
+    {
+      "check": "broken_links",
+      "passed": false,
+      "detail": "checked=13, broken=[('https://openai.com/chatgpt/pricing/', 404)]"
+    },
+    {
+      "check": "performance",
+      "passed": true,
+      "detail": "{'dns_ms': 38, 'tcp_ms': 121, 'ttfb_ms': 105, 'dom_load_ms': 3324, 'full_load_ms': 3410}"
+    },
+    {
+      "check": "accessibility",
+      "passed": false,
+      "detail": "blocking=1, total_violations=1, details=[{'id': 'color-contrast', 'impact': 'serious', 'nodes_affected': 4}]"
+    }
+  ]
+}

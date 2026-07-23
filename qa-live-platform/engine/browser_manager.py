@@ -14,19 +14,36 @@ class BrowserManager:
 
     def start(self):
         self.playwright = sync_playwright().start()
+
         browser_launcher = getattr(self.playwright, self.browser_type)
-        self.browser = browser_launcher.launch(headless=self.headless)
+
+        self.browser = browser_launcher.launch(
+            headless=self.headless,
+            args=[
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage",
+                "--disable-gpu",
+                "--single-process",
+                "--no-zygote",
+            ],
+        )
+
         self.context = self.browser.new_context(
             user_agent=(
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/126.0.0.0 Safari/537.36"
             ),
             viewport={"width": 1366, "height": 768},
         )
+
         self.page = self.context.new_page()
         return self.page
 
     def stop(self):
+        if self.page:
+            self.page.close()
         if self.context:
             self.context.close()
         if self.browser:
